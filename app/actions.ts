@@ -208,7 +208,7 @@ export async function createComment(formData: FormData) {
     revalidatePath(`/post/${postId}`);
 }
 
-export async function deleteComment(formData: FormData) {
+export async function deleteComment() {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
@@ -216,16 +216,16 @@ export async function deleteComment(formData: FormData) {
         return redirect("/api/auth/login");
     }
 
-    const comment = formData.get("comment") as string;
-    const postId = formData.get("postId") as string;
+    //TODO: delete comment
+}
 
-    const data = await prisma.comment.create({
-        data: {
-            text: comment,
-            userId: user.id,
-            postId: postId,
-        },
-    });
+export async function deletePost() {
+    const { getUser } = getKindeServerSession();
+    const user = await getUser();
 
-    revalidatePath(`/post/${postId}`);
+    if (!user) {
+        return redirect("/api/auth/login");
+    }
+
+    //TODO: delete post
 }

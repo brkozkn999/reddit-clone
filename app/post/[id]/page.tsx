@@ -71,7 +71,7 @@ async function getData(id: string) {
 
 export default async function PostPage({ params }: { params: { id: string } }) {
     const data = await getData(params.id);
-
+    
     return (
         <div className="max-w-[1200px] mx-auto flex gap-x-10 mt-4 mb-10">
             <div className="w-[70%] flex flex-col gap-y-5">

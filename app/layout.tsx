@@ -11,6 +11,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "bReddit",
   description: "Made by @brkozkn999",
+  icons: {
+    icon: "/favicon.svg",
+  }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {

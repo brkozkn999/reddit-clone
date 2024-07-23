@@ -67,6 +67,7 @@ export const Menubar = ({ editor }: { editor: Editor | null }) => {
     );
 };
 
+//TODO: this is not working correctly, need to fix
 export function TipTapEditor({
     setJson,
     json,
