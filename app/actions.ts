@@ -7,7 +7,7 @@ import { Prisma, TypeOfVote } from "@prisma/client";
 import { JSONContent } from "@tiptap/react";
 import { revalidatePath } from "next/cache";
 
-export async function updateUsername(prevState: any, formData: FormData) {
+export async function updateInformation(prevState: any, formData: FormData) {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
@@ -15,6 +15,9 @@ export async function updateUsername(prevState: any, formData: FormData) {
         return redirect("/api/auth/login");
     }
 
+    const email = formData.get("email") as string;
+    const firstname = formData.get("firstname") as string;
+    const lastname = formData.get("lastname") as string;
     const username = formData.get("username") as string;
 
     try {
@@ -23,13 +26,16 @@ export async function updateUsername(prevState: any, formData: FormData) {
                 id: user.id,
             },
             data: {
-                userName: username,
+                email: email,
+                firstName: firstname,
+                lastName: lastname,
+                userName: username
             },
         });
 
         return {
-            message: "Succesfully Updated name",
-            status: "green",
+            message: "Succesfully Updated!",
+            status: "success",
         };
     } catch (e) {
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
@@ -99,7 +105,7 @@ export async function updateSubDescription(prevState: any, formData: FormData) {
         });
 
         return {
-            status: "green",
+            status: "success",
             message: "Succesfully updated the description!",
         };
     } catch (e) {

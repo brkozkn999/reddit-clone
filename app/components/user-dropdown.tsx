@@ -25,11 +25,6 @@ function UserDropdown({ userImage }: UserDropdownProps) {
                     </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                    <Link href={'/create'} className='w-full'>
-                        Create Post
-                    </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
                     <Link href={'/settings'} className='w-full'>
                         Settings
                     </Link>

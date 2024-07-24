@@ -12,6 +12,9 @@ async function getData(userId: string) {
             id: userId
         },
         select: {
+            email: true,
+            firstName: true,
+            lastName: true,
             userName: true
         }
     });
@@ -21,6 +24,7 @@ async function getData(userId: string) {
 
 async function SettingsPage() {
     noStore();
+    /* TODO: add inputs for all informations */
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
@@ -30,7 +34,7 @@ async function SettingsPage() {
     const data = await getData(user?.id);
     return (
         <div className='max-w-[1000px] mx-auto flex flex-col mt-4'>
-            <SettingsForm username={data?.userName} />
+            <SettingsForm email={data?.email as string} firstname={data?.firstName as string} lastname={data?.lastName as string} username={data?.userName} />
         </div>
     )
 }

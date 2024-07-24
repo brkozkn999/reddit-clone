@@ -8,17 +8,18 @@ interface SubmitButtonProps {
     textNormal: string;
     textDisabled: string;
     className?: string;
+    disabled?: boolean;
 }
 
-function SubmitButton({ textNormal, textDisabled, className }: SubmitButtonProps) {
+function SubmitButton({ textNormal, textDisabled, className, disabled }: SubmitButtonProps) {
     const { pending } = useFormStatus();
     return (
         <>
             {pending ? (
-                <Button type="submit" disabled={pending} className={className}>
+                <Button type="submit" disabled={pending || disabled} className={className}>
                     <Loader className='inline-flex mr-2 h-4 w-4 animate-spin' /> {textDisabled}</Button>
             ) : (
-                <Button type="submit" className={className}>{textNormal}</Button>
+                <Button type="submit" className={className} disabled={disabled}>{textNormal}</Button>
             )}
         </>
     )
@@ -32,11 +33,11 @@ export function UpVote() {
     return (
         <>
             {pending ? (
-                <Button variant="outline" size="icon" disabled>
+                <Button variant="voteArrow" className='text-primary' size="icon" disabled>
                     <Loader2 className="h-4 w-4 animate-spin" />
                 </Button>
             ) : (
-                <Button variant="outline" size="sm" type="submit">
+                <Button variant="voteArrow" size="sm" type="submit">
                     <ArrowUp className="h-4 w-4" />
                 </Button>
             )}
@@ -49,11 +50,11 @@ export function DownVote() {
     return (
         <>
             {pending ? (
-                <Button variant="outline" size="icon" disabled>
-                    <Loader2 className="h-4 w-4 animate-spin" />
+                <Button variant="voteArrow" className='text-primary' size="icon" disabled>
+                    <Loader2 className="h-3 w-3 animate-spin" />
                 </Button>
             ) : (
-                <Button variant="outline" size="sm" type="submit">
+                <Button variant="voteArrow" size="sm" type="submit">
                     <ArrowDown className="h-4 w-4" />
                 </Button>
             )}

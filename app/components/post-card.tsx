@@ -31,13 +31,13 @@ export function PostCard({
 }: iAppProps) {
     return (
         <Card className="flex relative overflow-hidden">
-            <div className="flex flex-col items-center gap-y-2 bg-muted p-2">
+            <div className="flex flex-col items-center gap-y-1 bg-gradient-to-b from-muted/25 via-muted/60 to-muted/85 p-2">
                 <form action={handleVote}>
                     <input type="hidden" name="voteDirection" value="UP" />
                     <input type="hidden" name="postId" value={id} />
                     <UpVote />
                 </form>
-                {voteCount}
+                <span className="text-sm">{voteCount}</span>
                 <form action={handleVote}>
                     <input type="hidden" name="voteDirection" value="DOWN" />
                     <input type="hidden" name="postId" value={id} />

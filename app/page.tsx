@@ -62,7 +62,8 @@ export default function Home({
   return (
     <div className="max-w-[1000px] mx-auto flex gap-x-10 mt-4 mb-10">
       <div className="w-[65%] flex flex-col gap-y-5">
-        <CreatePostCard />
+        {/* <CreatePostCard /> */}
+        {/* Todo: fix static link */}
         <Suspense fallback={<SuspenseCard />} key={searchParams.page}>
           <ShowItems searchParams={searchParams} />
         </Suspense>
@@ -86,9 +87,6 @@ export default function Home({
             <Separator className="my-5" />
 
             <div className="flex flex-col gap-y-3">
-              <Button asChild variant="secondary">
-                <Link href="/r/test/create">Create Post</Link>
-              </Button>
               <Button asChild>
                 <Link href="/r/create">Create Community</Link>
               </Button>
