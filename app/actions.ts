@@ -225,13 +225,40 @@ export async function deleteComment() {
     //TODO: delete comment
 }
 
-export async function deletePost() {
+export async function deletePost(prevState: any, formData: FormData) {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
-    if (!user) {
+    if (!user)
         return redirect("/api/auth/login");
+
+    const postId = formData.get('postId') as string;
+
+    // Fetch the post information including the owner's userId
+    const postInfo = await prisma.post.findUnique({
+        where: { id: postId },
+        select: { userId: true },
+    });
+
+    // If the post does not exist or the user is not the owner, return an error or redirect
+    if (!postInfo || postInfo.userId !== user.id) {
+        return {
+            status: "error",
+            message: "You are not authorized to delete this post.",
+        };
     }
 
-    //TODO: delete post
+    // If the user is the owner, delete the post
+    await prisma.post.delete({
+        where: { id: postId },
+    });
+
+    // Revalidate the path
+    revalidatePath(`/`);
+
+    // Return a success message
+    return {
+        status: "success",
+        message: "Post deleted successfully.",
+    };
 }

@@ -1,12 +1,12 @@
-import { Button } from "@/app/components/ui/button";
 import { Card } from "@/app/components/ui/card";
-import { ArrowDown, ArrowUp, MessageCircle } from "lucide-react";
+import { MessageCircle, Trash2, TrashIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import CopyLink from "./copy-link";
 import { handleVote } from "../actions";
 import { DownVote, UpVote } from "./submit-button";
 import { RenderToJson } from "./render-to-json";
+import DeletePost from "./delete-post";
 
 interface iAppProps {
     title: string;
@@ -82,8 +82,8 @@ export function PostCard({
                             {commentAmount} Comments
                         </p>
                     </div>
-
                     <CopyLink id={id} />
+                    <DeletePost id={id} />
                 </div>
             </div>
         </Card>
